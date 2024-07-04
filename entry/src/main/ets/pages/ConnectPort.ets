@@ -11,7 +11,9 @@ struct ConnectPort {
   @State
   currentH5Time: number = 0
 
+  /** 发送消息给h5 */
   sendMessageToH5() {
+    // [native -> h5] 端口发送消息给h5
     this.currentPorts[0].postMessageEvent(JSON.stringify({ type: 'native-time', data: Date.now() }))
   }
 
@@ -33,9 +35,9 @@ struct ConnectPort {
           if (!this.currentPorts) {
             return
           }
-          // 发送端口给h5
+          // controller发送端口给h5
           this.controller.postMessage(TRANSMIT_PORT_KEY, [this.currentPorts[1]], '*')
-          // 监听h5的消息
+          // [h5 -> native] 端口监听h5的消息
           this.currentPorts[0].onMessageEvent((result: webview.WebMessage) => {
             if (typeof result === 'string') {
               const res: H5PostMessageModel = JSON.parse(result)

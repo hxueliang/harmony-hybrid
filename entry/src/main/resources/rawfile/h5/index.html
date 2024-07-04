@@ -23,6 +23,8 @@
                     // return alert('接收端口失败');
                 }
                 // alert('接收端口成功');
+
+                // [native -> h5] 端口监听native的消息
                 currentPort.onmessage = function (event) {
                     const res = JSON.parse(event.data);
                     if (res.type === 'native-time') {
@@ -32,11 +34,13 @@
             }
         });
 
+        /** 发送消息给原生 */
         function sendMessageToNative() {
             if (!currentPort) {
                 // return alert('未获取到端口');
                 return;
             }
+            // [h5 -> native] 端口发送消息给native 
             currentPort.postMessage(JSON.stringify({ type: 'h5-time', data: Date.now() }));
         }
     </script>
