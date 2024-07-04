@@ -13,7 +13,8 @@ struct Index {
           promptAction.showToast({ message: '点击了鸿蒙按钮' })
         })
       Web({
-        src: 'https://m.jd.com',
+        // src: 'https://m.jd.com',
+        src: $rawfile('h5/index.html'),
         controller: this.controller,
       })
         .width('100%')
