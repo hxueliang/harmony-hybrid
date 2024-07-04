@@ -11,11 +11,23 @@
 
 <body>
     <h3>h5页面</h3>
-    <img id="myImg" src="">
+    <img id="myImg" src="" style="width: 200px; height: 200px;">
     <button onclick="openAlbum()">打开相册</button>
     <script>
         /** 打开相册 */
         function openAlbum() {
+            if (!window.vx) {
+                alert('原先端未注册vx');
+                return;
+            }
+            if (window.vx.openAlbum) {
+                window.vx.openAlbum('natievImageUrl');
+            }
+        }
+
+        /** 获取图片url */
+        function natievImageUrl(url) {
+            document.getElementById('myImg').src = url;
         }
     </script>
 </body>
