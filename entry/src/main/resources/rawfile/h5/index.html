@@ -12,6 +12,17 @@
 <body>
     <h1>本地的H5页面</h1>
     <script>
+        const TRANSMIT_PORT_KEY = 'transmit_port_key';
+        let currentPort = null;
+        window.addEventListener('message', function (event) {
+            if (event.data === TRANSMIT_PORT_KEY) {
+                currentPort = event.ports[0];
+                if (!currentPort) {
+                    // return alert('接收端口失败');
+                }
+                // alert('接收端口成功');
+            }
+        })
     </script>
 </body>
 
