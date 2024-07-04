@@ -12,6 +12,7 @@
 <body>
     <h1>本地的H5页面</h1>
     <button onclick="sendMessageToNative()">发送消息给原生</button>
+    <div id="myDiv" style="line-height: 40px;"></div>
     <script>
         const TRANSMIT_PORT_KEY = 'transmit_port_key';
         let currentPort = null;
@@ -22,6 +23,12 @@
                     // return alert('接收端口失败');
                 }
                 // alert('接收端口成功');
+                currentPort.onmessage = function (event) {
+                    const res = JSON.parse(event.data);
+                    if (res.type === 'native-time') {
+                        document.getElementById('myDiv').innerText = res.data;
+                    }
+                };
             }
         });
 

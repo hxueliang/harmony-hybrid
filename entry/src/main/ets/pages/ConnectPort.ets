@@ -11,11 +11,15 @@ struct ConnectPort {
   @State
   currentH5Time: number = 0
 
+  sendMessageToH5() {
+    this.currentPorts[0].postMessageEvent(JSON.stringify({ type: 'native-time', data: Date.now() }))
+  }
+
   build() {
     Column({ space: 10 }) {
-      Button('鸿蒙按钮')
+      Button('发送消息给h5')
         .onClick(() => {
-          promptAction.showToast({ message: '点击了鸿蒙按钮' })
+          this.sendMessageToH5()
         })
       Text(this.currentH5Time.toString())
       Web({
