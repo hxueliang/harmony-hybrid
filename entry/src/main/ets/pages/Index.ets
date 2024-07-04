@@ -1,17 +1,27 @@
+import { promptAction } from '@kit.ArkUI'
+import { webview } from '@kit.ArkWeb'
+
 @Entry
 @Component
 struct Index {
-  @State message: string = 'Hello World';
+  controller: webview.WebviewController = new webview.WebviewController()
 
   build() {
-    Row() {
-      Column() {
-        Text(this.message)
-          .fontSize(50)
-          .fontWeight(FontWeight.Bold)
-      }
-      .width('100%')
+    Column({ space: 10 }) {
+      Button('鸿蒙按钮')
+        .onClick(() => {
+          promptAction.showToast({ message: '点击了鸿蒙按钮' })
+        })
+      Web({
+        src: 'https://m.jd.com',
+        controller: this.controller,
+      })
+        .width('100%')
+        .layoutWeight(1)
     }
+    .width('100%')
     .height('100%')
+    .padding(16)
+    .backgroundColor(Color.Pink)
   }
 }
