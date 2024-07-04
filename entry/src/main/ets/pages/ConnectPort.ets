@@ -8,6 +8,8 @@ const TRANSMIT_PORT_KEY = 'transmit_port_key'
 struct ConnectPort {
   controller: webview.WebviewController = new webview.WebviewController()
   currentPorts: webview.WebMessagePort[] = []
+  @State
+  currentH5Time: number = 0
 
   build() {
     Column({ space: 10 }) {
@@ -15,6 +17,7 @@ struct ConnectPort {
         .onClick(() => {
           promptAction.showToast({ message: '点击了鸿蒙按钮' })
         })
+      Text(this.currentH5Time.toString())
       Web({
         src: $rawfile('h5/index.html'),
         controller: this.controller,
@@ -26,7 +29,17 @@ struct ConnectPort {
           if (!this.currentPorts) {
             return
           }
+          // 发送端口给h5
           this.controller.postMessage(TRANSMIT_PORT_KEY, [this.currentPorts[1]], '*')
+          // 监听h5的消息
+          this.currentPorts[0].onMessageEvent((result: webview.WebMessage) => {
+            if (typeof result === 'string') {
+              const res: H5PostMessageModel = JSON.parse(result)
+              if (res.type === 'h5-time') {
+                this.currentH5Time = res.data
+              }
+            }
+          })
         })
         .onAlert((event) => {
           promptAction.showToast({ message: event?.message })
@@ -38,4 +51,9 @@ struct ConnectPort {
     .padding(16)
     .backgroundColor(Color.Pink)
   }
+}
+
+class H5PostMessageModel {
+  type: string = ''
+  data: number = 0
 }

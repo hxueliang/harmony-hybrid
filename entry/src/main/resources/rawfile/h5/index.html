@@ -11,6 +11,7 @@
 
 <body>
     <h1>本地的H5页面</h1>
+    <button onclick="sendMessageToNative()">发送消息给原生</button>
     <script>
         const TRANSMIT_PORT_KEY = 'transmit_port_key';
         let currentPort = null;
@@ -22,7 +23,15 @@
                 }
                 // alert('接收端口成功');
             }
-        })
+        });
+
+        function sendMessageToNative() {
+            if (!currentPort) {
+                // return alert('未获取到端口');
+                return;
+            }
+            currentPort.postMessage(JSON.stringify({ type: 'h5-time', data: Date.now() }));
+        }
     </script>
 </body>
 
