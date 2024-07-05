@@ -2,6 +2,8 @@
   "src": [
     "pages/Index",
     "pages/ConnectPort",
-    "pages/CallMessage"
+    "pages/CallMessage",
+    "pages/HotMain",
+    "pages/HotStart"
   ]
 }
