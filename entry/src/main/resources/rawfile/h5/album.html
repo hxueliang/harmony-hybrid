@@ -4,16 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>打开相册选图片</title>
 </head>
 
 <body>
-    <h3>h5页面</h3>
-    <img id="myImg" src="" style="width: 200px; height: 200px;">
-    <button onclick="openAlbum()">打开相册</button>
-    <script>
+<h3>h5页面</h3>
+<img id="myImg" src="" style="width: 200px; height: 200px;">
+<button onclick="openAlbum()">打开相册</button>
+<script>
         /** 打开相册 */
         function openAlbum() {
             if (!window.vx) {
@@ -21,15 +21,18 @@
                 return;
             }
             if (window.vx.openAlbum) {
-                window.vx.openAlbum('natievImageUrl');
+                window.vx.openAlbum('nativeImageUrl');
             }
         }
 
         /** 获取图片url */
-        function natievImageUrl(url) {
+        function nativeImageUrl(url) {
+            // 拿到原生侧回传的url
             document.getElementById('myImg').src = url;
         }
-    </script>
+
+
+</script>
 </body>
 
 </html>

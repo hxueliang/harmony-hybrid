@@ -48,6 +48,7 @@ class WebSdk {
       return
     }
     // AlertDialog.show({ message: image.photoUris[0] })
+    // 调用h5的传过来的methodName方法，并回传入image.photoUris[0]给h5
     this.controller.runJavaScript(`${methodName}('${image.photoUris[0]}')`)
   }
 }
